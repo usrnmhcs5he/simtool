@@ -16,6 +16,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - **Persistent Storage**: DB in `/home/pi/bag/sms.db` survives rebuilds.
 - **Real-Time Updates**: Socket.IO for live SMS and log additions without page reload.
 - **Modem Compatibility**: Tested with SIM800L (GPIO serial0) and Huawei E3372 (USB ttyUSB0).
+- **All the tools on one place**: All the tools and programs are downloaded for the first time during the first run. Next update, script will check if something is missing and redownload, or just skips, thus safe some time.
 
 ## Requirements
 - Raspberry Pi (tested on Pi 4) with Raspbian.
