@@ -8,7 +8,8 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 ## Features
 - **SMS Reception**: Polls the modem for new SMS, parses (including UCS2 encoding), stores in DB, and deletes from modem.
 - **Web UI**: Responsive Flask app with SMS list, real-time logs, status indicators, and action buttons (delete, forward to email/Discord).
-- **Auto-Forwarding**: Toggle auto-forward to email or Discord via UI or SMS commands (e.g., 'cnFmail:S1' to enable email).
+- **Auto-Forwarding**: Toggle auto-forward to email or Discord via UI or SMS commands
+- **SMS commands to enable/disable features**: Send SMS 'cnFmail:S1' to enable auto-email forwarding (S0 to disable). Similarly for 'cnFdiscord'.
 - **CSV Export**: Download all SMS as sms_export.csv.
 - **Test SMS Injection**: Write a test SMS to the modem for diagnostics (may fail on data-only SIMs).
 - **Raw Modem Logging**: Logs raw AT+CMGL and AT+CMGR responses for troubleshooting.
