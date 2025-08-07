@@ -7,9 +7,8 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 
 ## Features
 - **SMS Reception**: Polls the modem for new SMS, parses (including UCS2 encoding), stores in DB, and deletes from modem.
-- **Web UI**: Responsive Flask app with SMS list, real-time logs, status indicators, and actions (delete, forward to email/Discord).
+- **Web UI**: Responsive Flask app with SMS list, real-time logs, status indicators, and action buttons (delete, forward to email/Discord).
 - **Auto-Forwarding**: Toggle auto-forward to email or Discord via UI or SMS commands (e.g., 'cnFmail:S1' to enable email).
-- **Special SMS Commands**: Control auto-forwarding remotely (persistent across restarts).
 - **CSV Export**: Download all SMS as sms_export.csv.
 - **Test SMS Injection**: Write a test SMS to the modem for diagnostics (may fail on data-only SIMs).
 - **Raw Modem Logging**: Logs raw AT+CMGL and AT+CMGR responses for troubleshooting.
@@ -49,6 +48,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - Use buttons to toggle auto-forward, delete, forward, or export.
 - Special SMS: 'cnFmail:S1' to enable email auto-forward (S0 to disable); similar for 'cnFdiscord'.
 - Diagnostics: Logs show raw modem responses; use `minicom -D /dev/ttyUSB0 -b 115200` for manual AT commands.
+- During every installation/upgrade script automatically add one test SMS to the database
 
 ## Approach
 The system uses pyserial for modem communication, Flask/Socket.IO for the web app, and SQLite for persistence. The listener loop polls the modem with AT commands (AT+CMGL, AT+CMGR, AT+CMGD), parses UCS2-encoded responses, and forwards via requests (Discord) or smtplib (email). State (auto-forward) is stored in DB for restart resilience. Setup scripts ensure idempotent installation, with venv/DB in `/home/pi/bag/` for persistence.
