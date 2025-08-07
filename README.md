@@ -18,6 +18,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - **Modem Compatibility**: Tested with SIM800L (GPIO serial0) and Huawei E3372 (USB ttyUSB0).
 - **All the tools on one place**: All the tools and programs are downloaded for the first time during the first run. Next update, script will check if something is missing and redownload, or just skips, thus safe some time.
 - **PIN code if SIM is locked**
+- **Dedicated diag script attached**: It List outputs from AT commands from the modem, good when changing the USB devices
 
 ## Requirements
 - Raspberry Pi (tested on Pi 4) with Raspbian.

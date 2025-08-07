@@ -45,11 +45,11 @@ cat << EOF > config.json
     {
       "from_numbers": ["+1234567890"],
       "email": {
-        "to": "your@email.com",
-        "server": "smtp.gmail.com",
+        "to": "recipient",
+        "server": "server",
         "port": 587,
-        "user": "your@gmail.com",
-        "pass": "app_password_here"
+        "user": "name",
+        "pass": "pass"
       },
       "webhook": "$WEBHOOK"
     }
