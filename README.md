@@ -52,6 +52,12 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - Diagnostics: Logs show raw modem responses; use `minicom -D /dev/ttyUSB0 -b 115200` for manual AT commands.
 - During every installation/upgrade script automatically add one test SMS to the database
 
+- Note: If using Huawei E3372 modem, you may need to edit /etc/usb_modeswitch.conf and set HuaweiAltModeGlobal=1 to ensure modem mode persists on boot.
+- Access at http://<rpi-ip>:5000 (or check service: sudo systemctl status sms_handler)
+- To start the program (automatically stops any existing sms_handler service to avoid port 5000 conflict), run: sudo systemctl stop sms_handler; cd /home/pi/sms_handler && source /home/pi/bag/venv/bin/activate && python web_interface.py
+
+
+
 ## Approach
 The system uses pyserial for modem communication, Flask/Socket.IO for the web app, and SQLite for persistence. The listener loop polls the modem with AT commands (AT+CMGL, AT+CMGR, AT+CMGD), parses UCS2-encoded responses, and forwards via requests (Discord) or smtplib (email). State (auto-forward) is stored in DB for restart resilience. Setup scripts ensure idempotent installation, with venv/DB in `/home/pi/bag/` for persistence.
 
