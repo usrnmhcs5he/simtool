@@ -28,7 +28,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 ## Installation
 1. Run the setup script:
    ```bash
-   bash install_sms_handler_v35.sh
+   bash install_sms_handler_vxx.sh # where xx is version curently used, starting with v35
    ```
 2. Edit `config.json` for your modem/port, baud, and forward rules (email credentials, webhook).
 3. Start the app:
@@ -36,6 +36,11 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
    sudo systemctl stop sms_handler; cd /home/pi/sms_handler && source /home/pi/bag/venv/bin/activate && python web_interface.py
    ```
    - Or use systemd: `sudo systemctl start sms_handler` (auto-starts on boot if enabled).
+
+## Upgrade
+1. Delete folder /home/pi/sms_handler
+2. re-run the given script, now incremental version vXX
+3. previous database and config stays in /home/pi/bag folder
 
 ## Usage
 - Access the UI at `http://<rpi-ip>:5000`.
