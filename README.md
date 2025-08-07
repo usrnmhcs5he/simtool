@@ -66,7 +66,7 @@ Tested with Tailscale, more details later
 ## Troubleshooting
 1. run the diagnose script:
 ```bash
-   diagnost_modem_v2.sh
+   diagnose_modem_v2.sh
    ```
 2. analyse output, it may help to find issues like locked SIM, full storage on SIM, inability to write to SIM etc
 
