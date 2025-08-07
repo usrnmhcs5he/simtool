@@ -1,0 +1,7 @@
+/home/pi/bag/venv/
+/home/pi/bag/sms.db
+/home/pi/bag/webhook.txt
+*.pyc
+__pycache__/
+nohup.out
+sms_export.csv
