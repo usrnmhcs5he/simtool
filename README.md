@@ -31,7 +31,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 ## Installation
 1. Run the setup script:
    ```bash
-   bash install_sms_handler_vxx.sh # where xx is version curently used, starting with v35
+   bash install_sms_handler_vxx.sh # where xx is version curently used, starting with v35 or use latest available version
    ```
 2. Edit `config.json` for your modem/port, baud, and forward rules (email credentials, webhook).
 3. Start the app:
