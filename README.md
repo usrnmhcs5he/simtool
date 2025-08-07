@@ -47,6 +47,9 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 ## Approach
 The system uses pyserial for modem communication, Flask/Socket.IO for the web app, and SQLite for persistence. The listener loop polls the modem with AT commands (AT+CMGL, AT+CMGR, AT+CMGD), parses UCS2-encoded responses, and forwards via requests (Discord) or smtplib (email). State (auto-forward) is stored in DB for restart resilience. Setup scripts ensure idempotent installation, with venv/DB in `/home/pi/bag/` for persistence.
 
+## Remote access
+Tested with Tailscale, more details later
+
 ## Credits
 - **Flask**: Web framework (flask.palletsprojects.com).
 - **Socket.IO**: Real-time updates (socket.io).
