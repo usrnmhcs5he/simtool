@@ -57,13 +57,19 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - Access at http://<rpi-ip>:5000 (or check service: sudo systemctl status sms_handler)
 - To start the program (automatically stops any existing sms_handler service to avoid port 5000 conflict), run: sudo systemctl stop sms_handler; cd /home/pi/sms_handler && source /home/pi/bag/venv/bin/activate && python web_interface.py
 
-
-
 ## Approach
 The system uses pyserial for modem communication, Flask/Socket.IO for the web app, and SQLite for persistence. The listener loop polls the modem with AT commands (AT+CMGL, AT+CMGR, AT+CMGD), parses UCS2-encoded responses, and forwards via requests (Discord) or smtplib (email). State (auto-forward) is stored in DB for restart resilience. Setup scripts ensure idempotent installation, with venv/DB in `/home/pi/bag/` for persistence.
 
 ## Remote access
 Tested with Tailscale, more details later
+
+## Troubleshooting
+1. run the diagnose script:
+'''bash
+bash diagnose_modem_v2.sh
+'''
+2. analyse output, it may help to find issues like locked SIM, full storage on SIM, inability to write to SIM etc
+
 
 ## Credits
 - **Flask**: Web framework (flask.palletsprojects.com).
