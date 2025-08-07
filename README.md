@@ -1,2 +1,59 @@
 # simtool
-Simple onescript allowing to resent SMS via email or webhooks (discord) with database and easy upgrade-abiity. Run on any RPI with USB modems
+
+# SMS Handler for Raspberry Pi
+
+## Overview
+This project is a web-based SMS management system for Raspberry Pi, designed to receive SMS messages from a serial modem (e.g., SIM800L or Huawei E3372), store them in a persistent SQLite database, and provide a Flask-powered UI for viewing, deleting, forwarding to email or Discord, and exporting to CSV. It supports auto-forwarding toggles via web buttons or special SMS commands, real-time updates with Socket.IO, and diagnostic logging for modem responses. The system is resilient to rebuilds, with the DB and venv in `/home/pi/bag/`. Built iteratively through collaborative development, starting from basic serial communication to advanced parsing and forwarding.
+
+## Features
+- **SMS Reception**: Polls the modem for new SMS, parses (including UCS2 encoding), stores in DB, and deletes from modem.
+- **Web UI**: Responsive Flask app with SMS list, real-time logs, status indicators, and actions (delete, forward to email/Discord).
+- **Auto-Forwarding**: Toggle auto-forward to email or Discord via UI or SMS commands (e.g., 'cnFmail:S1' to enable email).
+- **Special SMS Commands**: Control auto-forwarding remotely (persistent across restarts).
+- **CSV Export**: Download all SMS as sms_export.csv.
+- **Test SMS Injection**: Write a test SMS to the modem for diagnostics (may fail on data-only SIMs).
+- **Raw Modem Logging**: Logs raw AT+CMGL and AT+CMGR responses for troubleshooting.
+- **Persistent Storage**: DB in `/home/pi/bag/sms.db` survives rebuilds.
+- **Real-Time Updates**: Socket.IO for live SMS and log additions without page reload.
+- **Modem Compatibility**: Tested with SIM800L (GPIO serial0) and Huawei E3372 (USB ttyUSB0).
+
+## Requirements
+- Raspberry Pi (tested on Pi 4) with Raspbian.
+- Python 3.11+.
+- Serial modem (SIM800L with level shifter or Huawei E3372 USB).
+- SIM card (voice/data for SMS; data-only may limit write operations).
+- Libraries: flask, pyserial, requests, flask-socketio, gevent, gevent-websocket (installed via pip in venv).
+- External: Discord webhook for forwarding (stored in `/home/pi/bag/webhook.txt`).
+
+## Installation
+1. Run the setup script:
+   ```bash
+   bash install_sms_handler_v35.sh
+   ```
+2. Edit `config.json` for your modem/port, baud, and forward rules (email credentials, webhook).
+3. Start the app:
+   ```bash
+   sudo systemctl stop sms_handler; cd /home/pi/sms_handler && source /home/pi/bag/venv/bin/activate && python web_interface.py
+   ```
+   - Or use systemd: `sudo systemctl start sms_handler` (auto-starts on boot if enabled).
+
+## Usage
+- Access the UI at `http://<rpi-ip>:5000`.
+- Send SMS to the SIM's number for reception and forwarding.
+- Use buttons to toggle auto-forward, delete, forward, or export.
+- Special SMS: 'cnFmail:S1' to enable email auto-forward (S0 to disable); similar for 'cnFdiscord'.
+- Diagnostics: Logs show raw modem responses; use `minicom -D /dev/ttyUSB0 -b 115200` for manual AT commands.
+
+## Approach
+The system uses pyserial for modem communication, Flask/Socket.IO for the web app, and SQLite for persistence. The listener loop polls the modem with AT commands (AT+CMGL, AT+CMGR, AT+CMGD), parses UCS2-encoded responses, and forwards via requests (Discord) or smtplib (email). State (auto-forward) is stored in DB for restart resilience. Setup scripts ensure idempotent installation, with venv/DB in `/home/pi/bag/` for persistence.
+
+## Credits
+- **Flask**: Web framework (flask.palletsprojects.com).
+- **Socket.IO**: Real-time updates (socket.io).
+- **pyserial**: Serial communication (pythonhosted.org/pyserial).
+- **requests**: HTTP forwarding (requests.readthedocs.io).
+- **gevent/gevent-websocket**: Concurrency for Socket.IO (gevent.org).
+- **xAI/Grok**: Assisted in script development and debugging.
+
+## License
+MIT License - free to use/modify with attribution.
