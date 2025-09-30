@@ -29,9 +29,10 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
 - External: Discord webhook for forwarding (stored in `/home/pi/bag/webhook.txt`).
 
 ## Installation
+0. Up until v40, you have to create webhook.txt file preferably with real webhook in it, before running the script, that will be fixed
 1. Run the setup script:
    ```bash
-   bash install_sms_handler_vxx.sh # where xx is version curently used, starting with v35 or use latest available version
+   bash xx.sh # where xx is version curently used, starting with v35 or use latest available version
    ```
 2. Edit `config.json` for your modem/port, baud, and forward rules (email credentials, webhook).
 3. Start the app:
@@ -41,7 +42,7 @@ This project is a web-based SMS management system for Raspberry Pi, designed to 
    - Or use systemd: `sudo systemctl start sms_handler` (auto-starts on boot if enabled).
 
 ## Upgrade
-1. Delete folder /home/pi/sms_handler
+1. Delete folder /home/pi/sms_handler but keep the /home/pi/bag folder (there are apps downloaded, it will spare time during upgrades)
 2. re-run the given script, now incremental version vXX
 3. previous database and config stays in /home/pi/bag folder
 
