@@ -1,4 +1,4 @@
-# diagnose_modem_v2.py - Version 2: Enhanced diagnostic for SMS storage (SM vs ME), write/read/delete tests, and content dump
+# diagnose_modem.py - Version 2: Enhanced diagnostic for SMS storage (SM vs ME), write/read/delete tests, and content dump
 
 import serial
 import time
