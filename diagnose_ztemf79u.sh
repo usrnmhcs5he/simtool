@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# diagnose_ztemf79u_v1.sh - Diagnostic script for ZTE MF79U USB modem
+# diagnose_ztemf79u.sh - Version 1: Diagnostic script for ZTE MF79U USB modem
 
 # Constants
 PORT="/dev/ttyUSB0"  # Adjust to your AT port (test with ls /dev/ttyUSB*)

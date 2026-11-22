@@ -1,4 +1,15 @@
 #!/bin/bash
+# install_sms_handler.sh - installer for the SMS handler on a Raspberry Pi
+#
+# Version history (taken from the repository history)
+#   35 - 2025-08-07 - First published version.
+#   36 - 2025-08-07 - Published as a separate file, identical to 35.
+#   39 - 2025-09-30 - Email (SMTP) forwarding and the auto-forward toggles
+#                     removed; every received SMS is forwarded to the Discord
+#                     webhook; no restriction on sender numbers by default.
+#                     File renamed from 39.sh to install_sms_handler.sh on
+#                     2026-11-22 (no functional change).
+#
 # Exit on error
 set -e
 # Update system
@@ -564,3 +575,4 @@ echo "Version 39 setup complete. Venv and sms.db in /home/pi/bag persist. Edit c
 echo "Access at http://<rpi-ip>:5000 (or check service: sudo systemctl status sms_handler)"
 echo "To start the program (automatically stops any existing sms_handler service to avoid port 5000 conflict), run:"
 echo "sudo systemctl stop sms_handler; cd /home/pi/sms_handler && source /home/pi/bag/venv/bin/activate && python web_interface.py"
+# install_sms_handler.sh version 39
